@@ -1,6 +1,8 @@
 'use strict';
 
-
+/**
+ * copyright 2024 @_naynnn_
+ */
 
 // element toggle function
 const elementToggleFunc = function (elem) { elem.classList.toggle("active"); }
@@ -53,7 +55,9 @@ for (let i = 0; i < testimonialsItem.length; i++) {
 modalCloseBtn.addEventListener("click", testimonialsModalFunc);
 overlay.addEventListener("click", testimonialsModalFunc);
 
-
+/**
+ * copyright 2024 @_naynnn_
+ */
 
 // custom select variables
 const select = document.querySelector("[data-select]");
@@ -112,7 +116,9 @@ for (let i = 0; i < filterBtn.length; i++) {
   });
 
 }
-
+/**
+ * copyright 2024 @_naynnn_
+ */
 
 
 // contact form variables
@@ -134,7 +140,9 @@ for (let i = 0; i < formInputs.length; i++) {
   });
 }
 
-
+/**
+ * copyright 2024 @_naynnn_
+ */
 
 // page navigation variables
 const navigationLinks = document.querySelectorAll("[data-nav-link]");
@@ -157,3 +165,8 @@ for (let i = 0; i < navigationLinks.length; i++) {
 
   });
 }
+
+
+/**
+ * copyright 2024 @_naynnn_
+ */
