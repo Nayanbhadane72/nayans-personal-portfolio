@@ -1,173 +1,228 @@
 'use strict';
 
-
-
-//nayans-personal-portfolio/
-
-
-// element toggle function
+// Element toggle function
 const elementToggleFunc = function (elem) { elem.classList.toggle("active"); }
 
-
-
-// sidebar variables
+// Sidebar variables
 const sidebar = document.querySelector("[data-sidebar]");
 const sidebarBtn = document.querySelector("[data-sidebar-btn]");
 
-// sidebar toggle functionality for mobile
-sidebarBtn.addEventListener("click", function () { elementToggleFunc(sidebar); });
+// Sidebar toggle functionality for mobile
+sidebarBtn.addEventListener("click", function () { 
+    elementToggleFunc(sidebar);
+    // Toggle button text
+    const btnText = this.querySelector("span");
+    btnText.textContent = btnText.textContent === "Show Contacts" ? "Hide Contacts" : "Show Contacts";
+});
 
-
-
-// testimonials variables
-const testimonialsItem = document.querySelectorAll("[data-testimonials-item]");
-const modalContainer = document.querySelector("[data-modal-container]");
-const modalCloseBtn = document.querySelector("[data-modal-close-btn]");
-const overlay = document.querySelector("[data-overlay]");
-
-// modal variable
-const modalImg = document.querySelector("[data-modal-img]");
-const modalTitle = document.querySelector("[data-modal-title]");
-const modalText = document.querySelector("[data-modal-text]");
-
-// modal toggle function
-const testimonialsModalFunc = function () {
-  modalContainer.classList.toggle("active");
-  overlay.classList.toggle("active");
-}
-
-// add click event to all modal items
-for (let i = 0; i < testimonialsItem.length; i++) {
-
-  testimonialsItem[i].addEventListener("click", function () {
-
-    modalImg.src = this.querySelector("[data-testimonials-avatar]").src;
-    modalImg.alt = this.querySelector("[data-testimonials-avatar]").alt;
-    modalTitle.innerHTML = this.querySelector("[data-testimonials-title]").innerHTML;
-    modalText.innerHTML = this.querySelector("[data-testimonials-text]").innerHTML;
-
-    testimonialsModalFunc();
-
-  });
-
-}
-
-// add click event to modal close button
-modalCloseBtn.addEventListener("click", testimonialsModalFunc);
-overlay.addEventListener("click", testimonialsModalFunc);
-
-/**
- * copyright 2024 @_naynnn_
- */
-
-// custom select variables
-const select = document.querySelector("[data-select]");
-const selectItems = document.querySelectorAll("[data-select-item]");
-const selectValue = document.querySelector("[data-selecct-value]");
-const filterBtn = document.querySelectorAll("[data-filter-btn]");
-
-select.addEventListener("click", function () { elementToggleFunc(this); });
-
-// add event in all select items
-for (let i = 0; i < selectItems.length; i++) {
-  selectItems[i].addEventListener("click", function () {
-
-    let selectedValue = this.innerText.toLowerCase();
-    selectValue.innerText = this.innerText;
-    elementToggleFunc(select);
-    filterFunc(selectedValue);
-
-  });
-}
-
-// filter variables
-const filterItems = document.querySelectorAll("[data-filter-item]");
-
-const filterFunc = function (selectedValue) {
-
-  for (let i = 0; i < filterItems.length; i++) {
-
-    if (selectedValue === "all") {
-      filterItems[i].classList.add("active");
-    } else if (selectedValue === filterItems[i].dataset.category) {
-      filterItems[i].classList.add("active");
-    } else {
-      filterItems[i].classList.remove("active");
-    }
-
-  }
-
-}
-
-// add event in all filter button items for large screen
-let lastClickedBtn = filterBtn[0];
-
-for (let i = 0; i < filterBtn.length; i++) {
-
-  filterBtn[i].addEventListener("click", function () {
-
-    let selectedValue = this.innerText.toLowerCase();
-    selectValue.innerText = this.innerText;
-    filterFunc(selectedValue);
-
-    lastClickedBtn.classList.remove("active");
-    this.classList.add("active");
-    lastClickedBtn = this;
-
-  });
-
-}
-/**
- * copyright 2024 @_naynnn_
- */
-
-
-// contact form variables
-const form = document.querySelector("[data-form]");
-const formInputs = document.querySelectorAll("[data-form-input]");
-const formBtn = document.querySelector("[data-form-btn]");
-
-// add event to all form input field
-for (let i = 0; i < formInputs.length; i++) {
-  formInputs[i].addEventListener("input", function () {
-
-    // check form validation
-    if (form.checkValidity()) {
-      formBtn.removeAttribute("disabled");
-    } else {
-      formBtn.setAttribute("disabled", "");
-    }
-
-  });
-}
-
-/**
- * copyright 2024 @_naynnn_
- */
-
-// page navigation variables
+// Navigation variables
 const navigationLinks = document.querySelectorAll("[data-nav-link]");
 const pages = document.querySelectorAll("[data-page]");
 
-// add event to all nav link
-for (let i = 0; i < navigationLinks.length; i++) {
-  navigationLinks[i].addEventListener("click", function () {
+// Function to handle section navigation
+function showSection(sectionName) {
+    if (!sectionName) return;
+    
+    // Convert section name to lowercase for consistency
+    sectionName = sectionName.toLowerCase();
+    
+    // Hide all sections and remove active class from nav links
+    pages.forEach(page => page.classList.remove("active"));
+    navigationLinks.forEach(link => link.classList.remove("active"));
 
-    for (let i = 0; i < pages.length; i++) {
-      if (this.innerHTML.toLowerCase() === pages[i].dataset.page) {
-        pages[i].classList.add("active");
-        navigationLinks[i].classList.add("active");
-        window.scrollTo(0, 0);
-      } else {
-        pages[i].classList.remove("active");
-        navigationLinks[i].classList.remove("active");
-      }
+    // Show the target section
+    const targetSection = document.querySelector(`[data-page="${sectionName}"]`);
+    if (targetSection) {
+        targetSection.classList.add("active");
+        // Scroll to top of the section
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        // Find and activate the corresponding nav link
+        navigationLinks.forEach(link => {
+            if (link.textContent.toLowerCase() === sectionName) {
+                link.classList.add("active");
+            }
+        });
+        
+        // Update URL hash
+        history.pushState(null, '', `#${sectionName}`);
     }
-
-  });
 }
 
+// Add click event to all nav links
+navigationLinks.forEach(link => {
+    link.addEventListener("click", function(e) {
+        e.preventDefault();
+        const section = this.textContent.toLowerCase();
+        showSection(section);
+    });
+});
 
-/**
- * copyright 2024 @_naynnn_
- */
+// Handle URL hash changes
+window.addEventListener('hashchange', () => {
+    const section = window.location.hash.replace('#', '') || 'about';
+    showSection(section);
+});
+
+// Handle initial page load
+window.addEventListener('load', () => {
+    const section = window.location.hash.replace('#', '') || 'about';
+    showSection(section);
+    document.body.classList.add('loaded');
+});
+
+// Add smooth scrolling to all anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const section = this.getAttribute('href').replace('#', '');
+        showSection(section);
+    });
+});
+
+// Handle social media links
+document.querySelectorAll('.social-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+        if (!this.target) {
+            this.target = '_blank';
+            this.rel = 'noopener noreferrer';
+        }
+    });
+});
+
+// Add animation to skill bars
+const skillBars = document.querySelectorAll('.skills-progress');
+const animateSkills = () => {
+    skillBars.forEach(skill => {
+        const percentage = skill.dataset.progress;
+        skill.style.width = percentage;
+    });
+};
+
+// Animate skills when in viewport
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            animateSkills();
+        }
+    });
+});
+
+skillBars.forEach(skill => observer.observe(skill));
+
+// Form submission handling
+const contactForm = document.querySelector('#contactForm');
+if (contactForm) {
+    contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // Get form data
+        const formData = new FormData(this);
+        let isValid = true;
+        let formValues = {};
+        
+        // Validate form fields
+        formData.forEach((value, key) => {
+            formValues[key] = value.trim();
+            if (!value.trim()) {
+                isValid = false;
+                const input = this.querySelector(`[name="${key}"]`);
+                input.classList.add('error');
+            }
+        });
+
+        if (!isValid) {
+            alert('Please fill in all required fields');
+            return;
+        }
+
+        // Basic email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(formValues.email)) {
+            alert('Please enter a valid email address');
+            return;
+        }
+
+        // Show loading state
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalBtnText = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<ion-icon name="hourglass-outline"></ion-icon><span>Sending...</span>';
+
+        try {
+            // Send email using EmailJS
+            const response = await emailjs.send(
+                'service_ndzkyze', // EmailJS service ID
+                'template_i0cw1tk', // EmailJS template ID
+                {
+                    from_name: formValues.fullname,
+                    from_email: formValues.email,
+                    message: formValues.message,
+                    to_name: 'Nayan Bhadane', // Your name
+                    reply_to: formValues.email,
+                }
+            );
+
+            if (response.status === 200) {
+                // Show success message
+                alert('Thank you for your message! I will get back to you soon.');
+                
+                // Reset form
+                this.reset();
+                
+                // Remove any error classes
+                this.querySelectorAll('.error').forEach(input => {
+                    input.classList.remove('error');
+                });
+            } else {
+                throw new Error('Failed to send message');
+            }
+        } catch (error) {
+            console.error('Error sending email:', error);
+            alert('Sorry, there was an error sending your message. Please try again later or contact me directly at nayanbhadane72@gmail.com');
+        } finally {
+            // Restore button state
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnText;
+        }
+    });
+
+    // Remove error class on input focus
+    contactForm.querySelectorAll('input, textarea').forEach(input => {
+        input.addEventListener('focus', function() {
+            this.classList.remove('error');
+        });
+    });
+}
+
+// Create scroll to top button
+const createScrollTopButton = () => {
+    if (!document.querySelector('.scroll-top')) {
+        const scrollTopBtn = document.createElement('button');
+        scrollTopBtn.classList.add('scroll-top');
+        scrollTopBtn.innerHTML = '↑';
+        scrollTopBtn.setAttribute('aria-label', 'Scroll to top');
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        document.body.appendChild(scrollTopBtn);
+    }
+};
+
+// Show/hide scroll to top button
+window.addEventListener('scroll', function() {
+    const scrollTopBtn = document.querySelector('.scroll-top');
+    if (scrollTopBtn) {
+        if (window.pageYOffset > 300) {
+            scrollTopBtn.classList.add('show');
+        } else {
+            scrollTopBtn.classList.remove('show');
+        }
+    }
+});
+
+// Initialize scroll to top button
+createScrollTopButton();
