@@ -23,6 +23,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -161,19 +165,19 @@
       <nav class="navbar">
         <ul class="navbar-list">
           <li class="navbar-item">
-            <button class="navbar-link active" data-nav-link>About</button>
+            <a href="#about" class="navbar-link active" data-nav-link>About</a>
           </li>
 
           <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Resume</button>
+            <a href="#resume" class="navbar-link" data-nav-link>Resume</a>
           </li>
 
           <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Projects</button>
+            <a href="#projects" class="navbar-link" data-nav-link>Projects</a>
           </li>
 
           <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Contact</button>
+            <a href="#contact" class="navbar-link" data-nav-link>Contact</a>
           </li>
         </ul>
       </nav>
@@ -182,7 +186,7 @@
         <!--
           - #ABOUT
         -->
-        <section class="about active" data-page="about">
+        <section class="about active" data-page="about" id="about">
 
           <header>
             <h2 class="h2 article-title">About me</h2>
@@ -191,11 +195,12 @@
           <section class="about-text">
             <p>
               I'm a B.Tech Student from G H Raisoni College Of Engineering Nagpur, India, Studying in Computer Science And Engineering(Cyber Security).
-              
             </p>
-
             <p>
-             
+              Passionate about creating secure and innovative solutions in the digital world.
+            </p>
+            <p>
+              Always eager to learn and explore new technologies in cybersecurity and software development.
             </p>
           </section>
 
@@ -207,6 +212,19 @@
             <h3 class="h3 service-title">Working on...</h3>
 
             <ul class="service-list">
+
+              <li class="service-item">
+
+                <div class="service-icon-box">
+                  <img src="https://img.icons8.com/?size=100&id=FBycNmdwUQz1&format=png&color=000000"  width="60">
+                </div>
+
+                <div class="service-content-box">
+                  <h4 class="h4 service-item-title">Java Development</h4>
+
+                </div>
+
+              </li>
 
               <li class="service-item">
 
@@ -248,64 +266,13 @@
 
               </li>
 
-              <li class="service-item">
-
-                <div class="service-icon-box">
-                  <img src="https://img.icons8.com/?size=100&id=FBycNmdwUQz1&format=png&color=000000"  width="60">
-                </div>
-
-                <div class="service-content-box">
-                  <h4 class="h4 service-item-title">Java Development</h4>
-
-                </div>
-
-              </li>
+             
 
             </ul>
 
           </section>
 
-          <!--
-            - testimonials modal
-          -->
-          <div class="modal-container" data-modal-container>
 
-            <div class="overlay" data-overlay></div>
-
-            <section class="testimonials-modal">
-
-              <button class="modal-close-btn" data-modal-close-btn>
-                <ion-icon name="close-outline"></ion-icon>
-              </button>
-
-              <div class="modal-img-wrapper">
-                <figure class="modal-avatar-box">
-                  <img src="./assets/images/avatar-1.png" alt="Daniel lewis" width="80" data-modal-img>
-                </figure>
-
-                <img src="./assets/images/icon-quote.svg" alt="quote icon">
-              </div>
-
-              <div class="modal-content">
-
-                <h4 class="h3 modal-title" data-modal-title>Daniel lewis</h4>
-
-                <time datetime="2021-06-14">14 June, 2021</time>
-
-                <div data-modal-text>
-                  <p>
-                    
-                  </p>
-                </div>
-
-              </div>
-
-            </section>
-
-          </div>
-        
-
-        
 
       </section>
 
@@ -315,13 +282,21 @@
       <!--
         - #RESUME
       -->
-      <section class="resume" data-page="resume">
+      <section class="resume" data-page="resume" id="resume">
 
         <header>
           <h2 class="h2 article-title">Resume</h2>
         </header>
 
         <section class="timeline">
+
+          
+          <div class="resume-btn-container" style="text-align: center; margin: 20px 0;">
+            <a href="./nayans_resume.pdf" target="_blank" class="resume-btn" style="display: inline-block; padding: 12px 24px; background-color: var(--orange-yellow-crayola); color: var(--white); text-decoration: none; border-radius: 8px; font-weight: 500; transition: 0.3s ease;">
+              <ion-icon name="document-text-outline" style="vertical-align: middle; margin-right: 8px;"></ion-icon>
+              View Resume
+            </a>
+          </div>
 
           <div class="title-wrapper">
             <div class="icon-box">
@@ -480,7 +455,7 @@
       <!--
         - #PROJECTS
       -->
-      <section class="portfolio" data-page="projects">
+      <section class="portfolio" data-page="projects" id="projects">
         <header>
           <h2 class="h2 article-title">Projects</h2>
         </header>
@@ -508,19 +483,32 @@
       <!--
         - #CONTACT
       -->
-      <section class="contact" data-page="contact">
+      <section class="contact" data-page="contact" id="contact">
         <header>
           <h2 class="h2 article-title">Contact</h2>
         </header>
 
        <div class="col-12 col-md-8 col-xl-8 rightside">
-                <h5 class="h5 article-title">
-                  If you have any suggestion, project or even you want to say
+                <h5 class="form-title">
                   Hello.. please fill out the form below and I will reply you
                   shortly.
                 </h5>
-<!--Form Here-->>
-<iframe width="640px" height="480px" src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAO__TcYve1UNFBJMldKR0RCN01aN1VOVkZCQ1NLRTVIWi4u&embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe></div>  
+                <div class="form-container">
+                  <iframe 
+                    width="640px" 
+                    height="480px" 
+                    src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAO__TcYve1UNFBJMldKR0RCN01aN1VOVkZCQ1NLRTVIWi4u&embed=true" 
+                    frameborder="0" 
+                    marginwidth="0" 
+                    marginheight="0" 
+                    style="border: none; max-width:100%; max-height:100vh" 
+                    allowfullscreen 
+                    webkitallowfullscreen 
+                    mozallowfullscreen 
+                    msallowfullscreen>
+                  </iframe>
+                </div>
+              </div>  
       </section>
 
     </div>
@@ -530,15 +518,17 @@
   </main>
 
   <!--
+    - custom js link
+  -->
+  <script src="./assets/js/script.js"></script>
+  <script src="./assets/js/testimonials.js"></script>
+  <script src="./assets/js/navigation.js"></script>
+
+  <!--
     - ionicon link
   -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
-  <!--
-    - custom js link
-  -->
-  <script src="./assets/js/script.js"></script>
 
 </body>
 
